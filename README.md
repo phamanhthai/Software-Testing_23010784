@@ -1,148 +1,81 @@
-# 📦 Bài Thực Hành: Kiểm Thử Hộp Đen (Black-box Testing)
+BÀI THỰC HÀNH – KIỂM THỬ HỘP ĐEN / HỘP TRẮNG (Black-box Testing)
+Môn: Đánh giá và kiểm định chất lượng phần mềm Phương pháp: Kiểm thử hộp đen – Phân lớp tương đương + Phân tích giá trị biên Kiểm thử hộp trắng (White-box Testing)
+Công cụ: Java (OpenJDK 21), VSCode
 
-> **Môn học:** Kiểm thử phần mềm  
-> **Ngôn ngữ:** Python 3  
-> **Framework kiểm thử:** `unittest` + `pytest`  
-> **Kỹ thuật áp dụng:** Phân lớp tương đương · Phân tích giá trị biên · Dữ liệu không hợp lệ
+Cấu trúc thư mục
+BlackBoxTesting/
+├── README.md                       ← File hướng dẫn đọc bài tập
+├── DanhSachTestCase.docx       ← Danh sách toàn bộ test case
+├── KetQuaKiemThu.docx          ← Kết quả chạy kiểm thử (Pass/Fail)
+└── MoTaKiemThuHopDen.docx      ← Mô tả cách áp dụng kiểm thử hộp đen
+└── MoTaKiemThuHopTrang.docx      ← Mô tả cách áp dụng kiểm thử hộp trắng
+└── src/
+    ├── Bai1_ChuViHinhChuNhat.java
+    ├── Bai2_DienTichHinhChuNhat.java
+    ├── Bai3_PhuongTrinhBac2.java
+    ├── Bai4_SoNgayCuaThang.java
+    ├── Bai5_SoNguyenTo.java
+    ├── Bai6_TongXenKe.java
+    ├── Bai7_UCLN.java
+    └── Bai8_TongGiaiThua.java
+Hướng dẫn đọc bài tập
+Bước 1 – Đọc mô tả kiểm thử
+Mở file docs/MoTaKiemThuHopDen.docx để hiểu cách áp dụng 3 kỹ thuật kiểm thử hộp đen, hộp trắng cho từng bài:
 
----
+Phân lớp tương đương – chia miền đầu vào thành các nhóm xử lý giống nhau
+Phân tích giá trị biên – kiểm tra tại các điểm ranh giới
+Dữ liệu không hợp lệ – kiểm tra khi chương trình nhận đầu vào sai
+Bước 2 – Xem danh sách test case
+Mở file docs/DanhSachTestCase.docx để xem toàn bộ các test case được thiết kế:
 
-## 📋 Nội dung bài tập
+Hàng trắng = dữ liệu hợp lệ
+Hàng vàng = giá trị biên đặc biệt (cần chú ý)
+Hàng đỏ = dữ liệu sai / không hợp lệ
+Bước 3 – Xem kết quả chạy kiểm thử
+Mở file docs/KetQuaKiemThu.docx để xem kết quả thực tế khi chạy từng test case.
 
-Bài gồm **8 chương trình Python**, mỗi chương trình có mã nguồn và test case kiểm thử hộp đen đầy đủ:
+Bước 4 – Đọc mã nguồn
+Mở thư mục src/ trong VSCode. Mỗi file Java tương ứng với một bài toán, bên trong đã bao gồm cả hàm xử lý lẫn các test case trong main().
 
-| # | Bài toán | File |
-|---|----------|------|
-| 1 | Tính chu vi hình chữ nhật | `src/bai1_chu_vi_hcn.py` |
-| 2 | Tính diện tích hình chữ nhật | `src/bai2_dien_tich_hcn.py` |
-| 3 | Giải phương trình bậc 2 | `src/bai3_pt_bac2.py` |
-| 4 | Tính số ngày của một tháng | `src/bai4_so_ngay_thang.py` |
-| 5 | Kiểm tra số nguyên tố | `src/bai5_nguyen_to.py` |
-| 6 | Tính tổng S = 1 - 2 + 3 - 4 + ... + n | `src/bai6_tong_xen_ke.py` |
-| 7 | Tìm UCLN của a và b | `src/bai7_ucln.py` |
-| 8 | Tính tổng S = 1! + 2! + 3! + ... + n! | `src/bai8_tong_giai_thua.py` |
+Cách chạy chương trình trong VSCode
+Cài đặt yêu cầu
+Java JDK 17+ (hoặc OpenJDK 21)
+VSCode với Extension Pack for Java
+Chạy từng bài
+Mở file .java trong VSCode, nhấn nút Run trên thanh công cụ, hoặc dùng terminal:
 
----
-
-## 📁 Cấu trúc thư mục
-
-```
-black-box-testing/
-│
-├── src/                          # Mã nguồn 8 bài toán + test cases
-│   ├── bai1_chu_vi_hcn.py
-│   ├── bai2_dien_tich_hcn.py
-│   ├── bai3_pt_bac2.py
-│   ├── bai4_so_ngay_thang.py
-│   ├── bai5_nguyen_to.py
-│   ├── bai6_tong_xen_ke.py
-│   ├── bai7_ucln.py
-│   └── bai8_tong_giai_thua.py
-│
-├── docs/                         # Tài liệu nộp bài
-│   ├── 1_danh_sach_testcase.docx          # Danh sách test case chi tiết
-│   ├── 2_ket_qua_kiem_thu.docx            # Kết quả chạy kiểm thử
-│   └── 3_mo_ta_kiem_thu_hop_den.docx      # Mô tả cách áp dụng kiểm thử hộp đen
-│
-└── README.md
-```
-
----
-
-## 🚀 Hướng dẫn chạy kiểm thử
-
-### Yêu cầu
-- Python 3.x
-- pytest (`pip install pytest`)
-
-### Chạy tất cả test cases
-
-```bash
+# Mở terminal trong VSCode (Ctrl + `)
 cd src
-python -m pytest -v
-```
 
-### Chạy test case của từng bài
+javac Bai1_ChuViHinhChuNhat.java && java Bai1_ChuViHinhChuNhat
+javac Bai2_DienTichHinhChuNhat.java && java Bai2_DienTichHinhChuNhat
+javac Bai3_PhuongTrinhBac2.java && java Bai3_PhuongTrinhBac2
+javac Bai4_SoNgayCuaThang.java && java Bai4_SoNgayCuaThang
+javac Bai5_SoNguyenTo.java && java Bai5_SoNguyenTo
+javac Bai6_TongXenKe.java && java Bai6_TongXenKe
+javac Bai7_UCLN.java && java Bai7_UCLN
+javac Bai8_TongGiaiThua.java && java Bai8_TongGiaiThua
+Tóm tắt 8 bài toán
+Bài	Chức năng	Đầu vào	Xử lý dữ liệu sai
+1	Chu vi HCN	a, b (double)	Trả -1 nếu a≤0 hoặc b≤0
+2	Diện tích HCN	a, b (double)	Trả -1 nếu a≤0 hoặc b≤0
+3	Giải PT bậc 2	a, b, c (double)	Xử lý TH a=0 riêng
+4	Số ngày tháng	tháng (1-12), năm (>0)	Trả -1 nếu ngoài phạm vi
+5	Kiểm tra SNT	n (int)	Báo lỗi nếu n<0
+6	Tổng 1-2+3-4…+n	n (int ≥1)	Trả Long.MIN_VALUE nếu n≤0
+7	Tìm ƯCLN	a, b (int >0)	Trả -1 nếu a≤0 hoặc b≤0
+8	Tổng giai thừa	n (int ≥1)	Trả Long.MIN_VALUE / -1
+Kết quả kiểm thử tổng hợp
+Chỉ số	Giá trị
+Tổng số test case	75
+PASS	75 (100%)
+FAIL	0 (0%)
+Test case hợp lệ	47
+Test case biên đặc biệt	12
+Test case dữ liệu sai / không hợp lệ	16
+GitHub Issues
+Theo yêu cầu bài thực hành:
 
-```bash
-# Ví dụ: chạy riêng bài 3
-python -m pytest bai3_pt_bac2.py -v
-
-# Chạy và xem kết quả tóm tắt
-python -m pytest --tb=short
-```
-
-### Kết quả mong đợi
-
-```
-============================= test session starts ==============================
-collected 88 items
-
-bai1_chu_vi_hcn.py      9 passed
-bai2_dien_tich_hcn.py   9 passed
-bai3_pt_bac2.py         9 passed
-bai4_so_ngay_thang.py  13 passed
-bai5_nguyen_to.py      12 passed
-bai6_tong_xen_ke.py    11 passed
-bai7_ucln.py           11 passed
-bai8_tong_giai_thua.py 14 passed
-
-============================== 88 passed in 3.56s ==============================
-```
-
----
-
-## 📄 Xem tài liệu bài làm
-
-Tất cả tài liệu nằm trong thư mục `docs/`:
-
-| Tài liệu | Nội dung |
-|----------|----------|
-| [`1_danh_sach_testcase.docx`](docs/1_danh_sach_testcase.docx) | Bảng liệt kê đầy đủ các test case cho cả 8 bài, phân loại theo: hợp lệ, giá trị biên, không hợp lệ |
-| [`2_ket_qua_kiem_thu.docx`](docs/2_ket_qua_kiem_thu.docx) | Kết quả chạy kiểm thử thực tế: lệnh chạy, output terminal, bảng tổng hợp và chi tiết từng bài |
-| [`3_mo_ta_kiem_thu_hop_den.docx`](docs/3_mo_ta_kiem_thu_hop_den.docx) | Giải thích cách áp dụng phân lớp tương đương, giá trị biên và dữ liệu không hợp lệ cho từng bài |
-
----
-
-## 🔍 Kỹ thuật kiểm thử hộp đen áp dụng
-
-### 1. Phân lớp tương đương (Equivalence Partitioning)
-Chia miền đầu vào thành các lớp có hành vi tương tự nhau. Chọn một đại diện cho mỗi lớp để giảm số lượng test case mà vẫn đảm bảo độ phủ.
-
-**Ví dụ – Bài 5 (Kiểm tra số nguyên tố):**
-- Lớp 1: n là số nguyên tố (n=2, n=7, n=97) → kết quả `True`
-- Lớp 2: n là hợp số (n=4, n=9) → kết quả `False`
-- Lớp 3: n < 2 (n=0, n=1, n=-5) → `ValueError`
-
-### 2. Phân tích giá trị biên (Boundary Value Analysis)
-Tập trung kiểm thử tại các giá trị cận biên vì lỗi thường xảy ra ở đây.
-
-**Ví dụ – Bài 4 (Số ngày tháng):**
-- Biên tháng: tháng=1, tháng=12
-- Biên năm nhuận: năm 1900 (chia 100, không chia 400 → không nhuận), năm 2000 (chia 400 → nhuận)
-
-### 3. Dữ liệu không hợp lệ (Invalid Data Testing)
-Đưa vào dữ liệu ngoài miền hợp lệ để kiểm tra khả năng xử lý lỗi: giá trị 0, âm, số thực thay cho nguyên, chuỗi ký tự, None, danh sách.
-
----
-
-## 📊 Thống kê test cases
-
-| Bài | Hợp lệ | Biên | Không hợp lệ | Tổng |
-|-----|--------|------|--------------|------|
-| Bài 1 | 4 | 1 | 4 | 9 |
-| Bài 2 | 4 | 1 | 4 | 9 |
-| Bài 3 | 5 | 1 | 3 | 9 |
-| Bài 4 | 4 | 4 | 5 | 13 |
-| Bài 5 | 5 | 2 | 5 | 12 |
-| Bài 6 | 6 | 1 | 4 | 11 |
-| Bài 7 | 6 | 1 | 4 | 11 |
-| Bài 8 | 8 | 1 | 5 | 14 |
-| **Tổng** | **42** | **12** | **34** | **88** |
-
----
-
-## 🗂️ GitHub Issues
-
-- **Issue #1 – Test case dữ liệu hợp lệ:** Thiết kế và triển khai 54 test cases (hợp lệ + biên) cho 8 bài toán
-- **Issue #2 – Test case dữ liệu không hợp lệ:** Thiết kế và triển khai 34 test cases dữ liệu sai, biên ngoại lệ cho 8 bài toán
+Issue 1 – Thiết kế và viết test case cho dữ liệu hợp lệ
+Issue 2 – Thiết kế và viết test case cho dữ liệu không hợp lệ, biên và ngoại lệ
+Mỗi issue được giải quyết bằng một commit riêng tương ứng.
